@@ -17,7 +17,7 @@ class NotifySummonedJurors
           #   if you've never been summoned.
 
           groups_to_notify =
-            groups_on_alert.detect do |group|
+            groups_on_alert.select do |group|
               instruction.include? group
             end
 
