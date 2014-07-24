@@ -46,7 +46,7 @@ class NotifySummonedJurors
       groups_to_notify.each do |group|
         summoned_jurors = Summons.for_current_week.where(group_number: group)
         summoned_jurors.each do |juror|
-          Resque.enqueue(SendSms, from_phone, juror.phone_number, instruction)
+          Resque.enqueue(SendSms, juror.phone_number, instruction)
         end
       end
     end

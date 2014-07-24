@@ -2,8 +2,11 @@ class SendSms
   @queue = :high
 
   class << self
-    def perform(from, to, body)
-      twilio_client.account.messages.create(from: from, to: to, body: body)
+    def perform(to, body)
+      twilio_client.account.messages.create(
+        from: SMS_NOTIFY_NUMBER,
+        to: to, body: body
+      )
     end
 
     private
