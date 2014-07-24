@@ -48,14 +48,15 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'byebug', require: false
 end
 
 group :test do
   gem 'faker'
 end
 
-group :development, :test do
-  gem 'byebug', require: false
+group :production do
+  gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password
