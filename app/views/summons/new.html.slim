@@ -1,0 +1,11 @@
+- form_for @summons, url: summons_path do |f|
+  = f.label :service_week
+  = f.date_field :service_week
+
+  = f.label :group_numer
+  = f.number_field :group_number
+
+  = f.label :phone_number
+  = f.phone_field :phone_number
+
+  = f.submit 'Notify me when my jury duty happens!'
