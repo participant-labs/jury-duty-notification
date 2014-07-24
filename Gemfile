@@ -9,6 +9,7 @@ gem 'unicorn-rails'
 
 # Rack
 gem 'rack-timeout'
+gem 'rack-canonical-host'
 
 # Views
 gem 'slim'
