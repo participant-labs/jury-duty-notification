@@ -1,1 +1,1 @@
-Resque.redis = Redis.new
+Resque.redis = ENV['REDISTOGO_URL'] || Redis.new
