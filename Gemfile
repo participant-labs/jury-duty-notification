@@ -19,6 +19,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # scraping
 gem 'nokogiri'
 
+# notfications
+gem 'twilio-ruby'
 
 gem 'resque'
 gem 'resque-heroku'
