@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724055858) do
+ActiveRecord::Schema.define(version: 20140724062011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,6 @@ ActiveRecord::Schema.define(version: 20140724055858) do
     t.text    "phone_number", null: false
   end
 
-  add_index "summons", ["service_week"], name: "index_summons_on_service_week", using: :btree
+  add_index "summons", ["service_week", "group_number", "phone_number"], name: "index_summons_on_service_week_and_group_number_and_phone_number", unique: true, using: :btree
 
 end
