@@ -7,13 +7,15 @@ class SummonsController < ApplicationController
     @summons = Summons.new(summons_params)
     if @summons.save
       flash.notice = "Great! We'll be texting you shortly to confirm your notification."
+      redirect_to root_path
     elsif uniqueness_error?(@summons)
       # we use a notice because we already have this person on record
       flash.notice = @summons.errors.full_messages.to_sentence
+      redirect_to root_path
     else
       flash.alert = @summons.errors.full_messages.to_sentence
+      render :new
     end
-    redirect_to root_path
   end
 
   private

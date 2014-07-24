@@ -37,7 +37,8 @@ describe SummonsController do
     shared_examples_for 'summons failure' do
       it 'fails' do
         expect { send_request }.to_not change(Summons, :count)
-        expect(response).to redirect_to(root_path)
+        expect(response).to be_success
+        expect(response).to render_template(:new)
         expect(flash.alert).to be_present
       end
     end
