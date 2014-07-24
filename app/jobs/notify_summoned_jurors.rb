@@ -39,25 +39,16 @@ class NotifySummonedJurors
     end
 
     def groups_on_alert
-      # summons.for_current_week.unsummoned
-      %w{101 112 602 605 616}
+      Summons.for_current_week.distinct.pluck(:group_number).map(&:to_s)
     end
 
     def notify(groups_to_notify, instruction)
-      puts
-      puts '*'*80
-      puts
-      puts "Notifying Groups: #{groups_to_notify}"
-      puts
-      puts "Message:"
-      puts  instruction
-      Resque.enqueue(SendSms, VENDOR_PHONE, SMS_NOTIFY_NUMBER, instruction)
-      # groups_to_notify.each do |group|
-      #   summoned_jurors = summons.for_current_week.where(group: group)
-      #   summoned_jurors.each do |juror|
-      #     Resque.enqueue(SendSms, from_phone, juror.phone, instruction)
-      #   end
-      # end
+      groups_to_notify.each do |group|
+        summoned_jurors = Summons.for_current_week.where(group_number: group)
+        summoned_jurors.each do |juror|
+          Resque.enqueue(SendSms, from_phone, juror.phone_number, instruction)
+        end
+      end
     end
   end
 
