@@ -1,11 +1,18 @@
-- form_for @summons, url: summons_path do |f|
-  = f.label :service_week
-  = f.date_field :service_week
+.page-header
+  h1 San Francisco Jury Duty Notifier
+  p.lead Because Jury Duty shouldn't mean you have to remember to visit a site every night
 
-  = f.label :group_numer
-  = f.number_field :group_number
+= form_for @summons, url: summons_path, html: { role: 'form' } do |f|
+  .form-group
+    = f.label :service_week
+    = f.date_field :service_week, class: 'form-control'
 
-  = f.label :phone_number
-  = f.phone_field :phone_number
+  .form-group
+    = f.label :group_numer
+    = f.number_field :group_number, class: 'form-control'
 
-  = f.submit 'Notify me when my jury duty happens!'
+  .form-group
+    = f.label :phone_number
+    = f.phone_field :phone_number, class: 'form-control'
+
+  = f.submit 'Notify me when my jury duty happens!', class: 'btn btn-default'

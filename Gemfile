@@ -8,6 +8,8 @@ gem 'pg'
 
 # Views
 gem 'slim'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 # Assets
 gem 'sass-rails', '~> 4.0.3'
