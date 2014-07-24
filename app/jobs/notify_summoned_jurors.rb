@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class NotifySummonedJurors
-  @queue = :www_high
+  @queue = :high
 
   JURY_INFO_URL = 'http://www.sfsuperiorcourt.org/divisions/jury-services/jury-reporting'
   GROUP_INSTRUCTION_CSS = '#mainContentWrap ul.square li'
@@ -51,6 +51,7 @@ class NotifySummonedJurors
       puts
       puts "Message:"
       puts  instruction
+      Resque.enqueue(SendSms, VENDOR_PHONE, SMS_NOTIFY_NUMBER, instruction)
       # groups_to_notify.each do |group|
       #   summoned_jurors = summons.for_current_week.where(group: group)
       #   summoned_jurors.each do |juror|
