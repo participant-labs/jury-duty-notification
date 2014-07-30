@@ -11,17 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724062011) do
+ActiveRecord::Schema.define(version: 20140730092030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "sms", force: true do |t|
+    t.json     "params",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "summons", force: true do |t|
-    t.date    "service_week", null: false
-    t.integer "group_number", null: false
-    t.text    "phone_number", null: false
+    t.date    "service_week",   null: false
+    t.integer "group_number",   null: false
+    t.text    "phone_number",   null: false
+    t.integer "canceled_by_id"
   end
 
   add_index "summons", ["service_week", "group_number", "phone_number"], name: "index_summons_on_service_week_and_group_number_and_phone_number", unique: true, using: :btree
+
+  add_foreign_key "summons", "sms", name: "summons_canceled_by_id_fk", column: "canceled_by_id"
 
 end

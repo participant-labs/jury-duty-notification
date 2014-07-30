@@ -7,7 +7,7 @@ class SummonsController < ApplicationController
     @summons = Summons.new(summons_params)
     if @summons.save
       flash.notice = "Great! We'll be texting you shortly to confirm your notification."
-      send_welcome_sms(@summons)
+      Sms.send_welcome(@summons)
       redirect_to root_path
     elsif uniqueness_error?(@summons)
       # we use a notice because we already have this person on record
@@ -20,12 +20,6 @@ class SummonsController < ApplicationController
   end
 
   private
-
-  def send_welcome_sms(summons)
-    Resque.enqueue(SendSms, summons.phone_number,
-      %{Welcome to the Jury Duty Notifier. Reply with CANCEL at any time to stop notifications.}
-    )
-  end
 
   def uniqueness_error?(summons)
     summons.errors.count == 1 && summons.errors[:phone_number].present? \

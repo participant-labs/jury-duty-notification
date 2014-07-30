@@ -39,7 +39,7 @@ class NotifySummonedJurors
     end
 
     def groups_on_alert
-      Summons.for_current_week.distinct.pluck(:group_number).map(&:to_s)
+      Summons.active.for_current_week.distinct.pluck(:group_number).map(&:to_s)
     end
 
     def notify(groups_to_notify, instruction)

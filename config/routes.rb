@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   root 'summons#new'
 
   resource :summons, only: :create
+
+  namespace :sms do
+    resources :replies, only: :create
+  end
 end

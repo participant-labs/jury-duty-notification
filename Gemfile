@@ -11,6 +11,9 @@ gem 'unicorn-rails'
 gem 'rack-timeout'
 gem 'rack-canonical-host'
 
+# Models
+gem 'foreigner'
+
 # Views
 gem 'slim'
 gem 'bootstrap-sass', '~> 3.2.0'
@@ -26,6 +29,7 @@ gem 'nokogiri'
 
 # notfications
 gem 'twilio-ruby'
+gem 'e164' # a phone number standard format used by twilio
 
 gem 'resque'
 gem 'resque-heroku'

@@ -1,6 +1,8 @@
 require 'current_week'
 
 class Summons < ActiveRecord::Base
+  belongs_to :canceled_by, class_name: 'Sms'
+
   validates_presence_of :service_week, :group_number, :phone_number
 
   validates_uniqueness_of :phone_number, scope: [:service_week, :group_number],
@@ -8,7 +10,14 @@ class Summons < ActiveRecord::Base
 
   validate :service_week_in_range
 
+  scope :active, -> { where(canceled_by_id: nil) }
+  scope :pending, -> { active.where('service_week >= ?', current_week)}
   scope :for_current_week, -> { where(service_week: current_week) }
+
+  def phone_number=(number)
+    number = E164.normalize(number) if number.present?
+    self[:phone_number] = number
+  end
 
   private
 
@@ -20,5 +29,4 @@ class Summons < ActiveRecord::Base
       errors.add(:service_week, 'is too far in the future')
     end
   end
-
 end
