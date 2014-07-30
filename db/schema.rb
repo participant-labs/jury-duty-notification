@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730092030) do
+ActiveRecord::Schema.define(version: 20140730093101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 20140730092030) do
   end
 
   create_table "summons", force: true do |t|
-    t.date    "service_week",   null: false
-    t.integer "group_number",   null: false
-    t.text    "phone_number",   null: false
-    t.integer "canceled_by_id"
+    t.date     "service_week",   null: false
+    t.integer  "group_number",   null: false
+    t.text     "phone_number",   null: false
+    t.integer  "canceled_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "summons", ["service_week", "group_number", "phone_number"], name: "index_summons_on_service_week_and_group_number_and_phone_number", unique: true, using: :btree
