@@ -5,7 +5,8 @@ ruby '2.1.2'
 # Server
 gem 'rails', '4.1.4'
 gem 'pg'
-gem 'unicorn-rails'
+#gem 'unicorn-rails'
+gem 'thin'
 
 # Rack
 gem 'rack-timeout'
